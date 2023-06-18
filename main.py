@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 
 
+# Rendering sidebar
+st.markdown("# LLM Notebook")
+st.sidebar.markdown("# LLM Notebook")
+
 df = pd.DataFrame({
     'first column': [1, 2, 3, 4],
         'second column': [10, 20, 30, 40]
@@ -14,3 +18,11 @@ st.write(f"This table is created by {name}:")
 
 st.line_chart(df)
 st.dataframe(df.style.highlight_max(axis=0))
+
+
+
+
+
+
+
+
