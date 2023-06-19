@@ -6,7 +6,6 @@ from oai_utils import get_openai_api_key
 
 openai_api_key = get_openai_api_key()
 
-
 def generate_response(input_text, model_name):
     llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key, model_name=model_name)
     st.info(llm(input_text))
