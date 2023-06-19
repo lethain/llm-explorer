@@ -1,28 +1,24 @@
+# borrowed from https://github.com/streamlit/llm-examples/blob/main/pages/2_Langchain_Quickstart.py
 import streamlit as st
-import pandas as pd
+from langchain import OpenAI
+from oai_utils import get_openai_api_key
 
 
-# Rendering sidebar
+openai_api_key = get_openai_api_key()
+
+
+def generate_response(input_text):
+    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
+    st.info(llm(input_text))
+
+
 st.markdown("# LLM Notebook")
 st.sidebar.markdown("# LLM Notebook")
 
-df = pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-        'second column': [10, 20, 30, 40]
-})
 
-st.text_input("Your name", key="name")
-name = st.session_state.name
-st.write(f"This table is created by {name}:")
-
-
-st.line_chart(df)
-st.dataframe(df.style.highlight_max(axis=0))
-
-
-
-
-
-
-
+with st.form('my_form'):
+    text = st.text_area('Prompt:', '', placeholder='How do I use Streamlit to query OpenAI?')
+    submitted = st.form_submit_button('Submit')
+    if submitted:
+        generate_response(text)
 
